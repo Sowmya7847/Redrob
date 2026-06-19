@@ -1,0 +1,30 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environments and dependencies
+.venv/
+venv/
+ENV/
+env/
+bin/
+lib/
+include/
+
+# Large Datasets and Models
+candidates.jsonl
+sample_candidates.json
+sample_submission.csv
+model_cache/
+
+# Application cache and local output files
+data_cache.json
+submission.csv
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
+

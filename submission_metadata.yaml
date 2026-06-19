@@ -1,0 +1,45 @@
+# Redrob Hackathon — Submission Metadata
+# Filename: submission_metadata.yaml
+
+team_name: "Antigravity-Ranker"
+
+primary_contact:
+  name: "Antigravity Developer"
+  email: "developer@example.com"
+  phone: "+91-9876543210"
+
+team_members:
+  - name: "Antigravity Developer"
+    email: "developer@example.com"
+    role: "ML Engineer"
+
+github_repo: "https://github.com/Antigravity/redrob-candidate-ranker"
+sandbox_link: "https://huggingface.co/spaces/Antigravity/redrob-ranker"
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "Local PC"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.14.2"
+  os: "Windows 11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+ai_tools_used:
+  - "Gemini"
+
+ai_usage_summary: |
+  Used Gemini to design the two-stage ranking architecture, implement the modular feature scorers (retrieval, product experience, continuous risk, and offline embedding utilities), and validate the outputs against the format and honeypot guidelines.
+
+methodology_summary: |
+  A robust two-stage ranking system designed for speed and offline compliance. Stage 1 streams candidates line-by-line using a broad retrieval score (skills, title relevance, keyword matches, and experience range) and isolates the top 3,000 candidates using a bounded min-heap. Stage 2 evaluates detailed Product Experience, continuous Risk, Behavioral, Trust, and Technical fits. It optimizes CPU load by only encoding semantic embeddings (via all-MiniLM-L6-v2 loaded offline from cache) for the top 500 pre-ranked candidates. Sort tie-breaks are strictly resolved alphabetically by candidate_id. Run-time is ~55 seconds on CPU with <150MB RAM footprint.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true

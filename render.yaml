@@ -1,6 +1,10 @@
 services:
   - type: web
     name: redrob-ai-talent-intelligence
-    env: docker
+    env: python
     plan: free
-    healthCheckPath: /_stcore/health
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: |
+      streamlit run app.py --server.port=$PORT --server.address=0.0.0.0

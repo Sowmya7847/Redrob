@@ -1,15 +1,7 @@
-[theme]
-primaryColor = "#00FFA6"
-backgroundColor = "#0D0E15"
-secondaryBackgroundColor = "#161824"
-textColor = "#E2E8F0"
-font = "sans serif"
-
 [server]
-port = 8501
+headless = true
 enableCORS = false
 enableXsrfProtection = false
-maxUploadSize = 5
 
-[browser]
-gatherUsageStats = false
+[theme]
+base = "light"

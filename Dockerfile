@@ -1,26 +1,17 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    software-properties-common \
-    && rm -rf /var/lib/apt/lists/*
-
 COPY requirements.txt .
 
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy embedding model loading utilities and download helper to cache model during build
-COPY src/ ./src/
-COPY download_model.py .
-RUN python download_model.py
 
 COPY . .
 
-EXPOSE 8501
+# Pre-download and cache model weights during docker build phase
+RUN python download_model.py
 
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
+EXPOSE 10000
 
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true

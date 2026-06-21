@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: redrob-ai-talent-intelligence
+    env: docker
+    plan: free
+    healthCheckPath: /_stcore/health

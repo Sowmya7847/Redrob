@@ -12,6 +12,11 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy embedding model loading utilities and download helper to cache model during build
+COPY src/ ./src/
+COPY download_model.py .
+RUN python download_model.py
+
 COPY . .
 
 EXPOSE 8501
